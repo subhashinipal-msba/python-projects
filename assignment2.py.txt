@@ -1,0 +1,75 @@
+# MSIS 615 - Introduction to Business Programming with Python
+# Assignment 3
+# Name: SUBHASHINI PAL
+# Date: [09/20/2025]
+
+import math
+import random
+# -----------------------------
+# Problem 1
+# -----------------------------
+# This program tests a user’s math skills by asking 3 questions 
+# from Assignment 2, Requirement 2. Each correct answer is worth 1 point.
+
+# We will use a for-loop to ask the questions and calculate total score.
+
+# List of math questions (question, correct_answer)
+questions = [
+    ("What is 5 + 7? ", 12),
+    ("What is 9 - 3? ", 6),
+    ("What is 4 * 3? ", 12)
+]
+
+score = 0
+
+for q, ans in questions:
+    try:
+        user_ans = int(input(q))
+        if user_ans == ans:
+            print("Correct!")
+            score += 1
+        else:
+            print("Incorrect. The correct answer is", ans)
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+
+print("\nYour total score is:", score, "out of", len(questions))
+
+
+# -----------------------------
+# Problem 2
+# -----------------------------
+# This program expands the bankAccounts class to include
+# an interest rate. It allows setting the rate and calculating
+# the expected yearly interest income with monthly compounding.
+
+class bankAccounts:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.balance = balance
+        self.rate = 0.01  # default interest rate = 1%
+
+    def setRate(self, new_rate):
+        """Set a new annual interest rate (as decimal, e.g., 0.08 for 8%)"""
+        self.rate = new_rate
+
+    def getExpectedInterest(self):
+        """Calculate yearly interest income with monthly compounding"""
+        # Formula: A = P * (1 + r/12)^12
+        future_balance = self.balance * ((1 + self.rate/12) ** 12)
+        interest_income = future_balance - self.balance
+        return interest_income
+
+
+# -----------------------------
+# Testing Problem 2
+# -----------------------------
+print("\n=== Bank Account Test ===")
+account = bankAccounts("John Smith", 1500)
+account.setRate(0.08)  # set interest rate to 8%
+interest = account.getExpectedInterest()
+
+print("Account Owner:", account.owner)
+print("Balance: $", account.balance)
+print("Rate:", account.rate * 100, "%")
+print("Expected interest income in 1 year: $", round(interest, 2)): ${interest:.2f}")
